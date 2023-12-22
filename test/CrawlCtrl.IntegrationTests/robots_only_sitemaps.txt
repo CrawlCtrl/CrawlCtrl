@@ -1,0 +1,8 @@
+Sitemap: https://www.example.com/sitemap_index.xml
+Sitemap: https://www.example.com/en/sitemap_index.xml
+Sitemap: https://www.example.com/da/sitemap_index.xml
+Sitemap: https://www.example.com/de/sitemap_index.xml
+Sitemap: https://www.example.com/es/sitemap_index.xml
+Sitemap: https://www.example.com/fr/sitemap_index.xml
+Sitemap: https://www.example.com/it/sitemap_index.xml
+Sitemap: https://www.example.com/sitemap.xml
