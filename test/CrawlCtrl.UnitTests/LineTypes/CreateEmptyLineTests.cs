@@ -9,10 +9,26 @@ public sealed class CreateEmptyLineTests
     [InlineData("  ")]
     [InlineData("Some random value")]
     [InlineData(" Some random value ")]
-    public void WHEN_Created_with_value_THEN_Value_is_set_to_provided_value(string value)
+    public void WHEN_Created_with_empty_value_THEN_Original_value_is_set_to_provided_value(string value)
     {
         // Arrange
         var expectedValue = value;
+
+        // Act
+        var emptyLine = new EmptyLine(value: value);
+
+        // Assert
+        Assert.Equal(expectedValue, emptyLine.OriginalValue);
+    }
+    
+    [Theory]
+    [InlineData("", "")]
+    [InlineData("  ", "")]
+    [InlineData("Some random value", "Some random value")]
+    [InlineData(" Some random value ", "Some random value")]
+    public void WHEN_Created_with_empty_value_THEN_Value_is_set_to_whitespace_trimmed_value(string value, string expectedValue)
+    {
+        // Arrange
 
         // Act
         var emptyLine = new EmptyLine(value: value);
@@ -22,13 +38,26 @@ public sealed class CreateEmptyLineTests
     }
 
     [Fact]
-    public void WHEN_Created_with_value_set_to_null_THEN_Throw_exception()
+    public void WHEN_Created_with_null_value_THEN_Throw_exception()
     {
         // Arrange
         const string? value = null;
         
         // Act
         var exception = Assert.Throws<ArgumentNullException>(() => new EmptyLine(value: value));
+        
+        // Assert
+        Assert.Equal("value", exception.ParamName);
+    }
+
+    [Fact]
+    public void WHEN_Created_with_non_empty_value_THEN_Throw_exception()
+    {
+        // Arrange
+        const string value = "Hello, World!";
+        
+        // Act
+        var exception = Assert.Throws<ArgumentException>(() => new EmptyLine(value: value));
         
         // Assert
         Assert.Equal("value", exception.ParamName);
@@ -52,10 +81,27 @@ public sealed class CreateEmptyLineTests
     [InlineData("  ")]
     [InlineData("Some comment")]
     [InlineData(" Some comment ")]
-    public void WHEN_Created_with_comment_THEN_Comment_is_set_to_provided_value(string? comment)
+    public void WHEN_Created_with_comment_THEN_Original_comment_is_set_to_provided_value(string? comment)
     {
         // Arrange
         var expectedComment = comment;
+
+        // Act
+        var emptyLine = new EmptyLine(value: "Some value", comment: comment);
+
+        // Assert
+        Assert.Equal(expectedComment, emptyLine.OiginalComment);
+    }
+    
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("", "")]
+    [InlineData("  ", "")]
+    [InlineData("Some comment", "Some comment")]
+    [InlineData(" Some comment ", "Some comment")]
+    public void WHEN_Created_with_comment_THEN_Comment_is_set_to_whitespace_trimmed_value(string? comment, string? expectedComment)
+    {
+        // Arrange
 
         // Act
         var emptyLine = new EmptyLine(value: "Some value", comment: comment);
