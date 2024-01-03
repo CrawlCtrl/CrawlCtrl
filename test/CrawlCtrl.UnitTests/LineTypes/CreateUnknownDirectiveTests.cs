@@ -113,19 +113,18 @@ public sealed class CreateUnknownDirectiveTests
         Assert.Equal("value", exception.ParamName);
     }
     
-    [Theory]
-    [InlineData("")]
-    [InlineData("  ")]
-    public void WHEN_Created_with_empty_value_THEN_Throw_exception(string value)
+    [Fact]
+    public void WHEN_Created_without_comment_THEN_Original_comment_is_not_set()
     {
         // Arrange
         const string directive = "testdirective";
-        
+        const string value = "Some value";
+
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new UnknownDirective(directive: directive, value: value));
+        var unknownDirective = new UnknownDirective(directive: directive, value: value);
         
         // Assert
-        Assert.Equal("value", exception.ParamName);
+        Assert.Null(unknownDirective.OriginalComment);
     }
     
     [Fact]

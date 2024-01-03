@@ -72,7 +72,7 @@ public sealed class EmptyLineDeserializationTests
         
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
-        Assert.Equal(expectedValue, emptyLine.Value);
+        Assert.Equal(expectedValue, emptyLine.OriginalValue);
     }
     
     [Fact]
@@ -95,7 +95,7 @@ public sealed class EmptyLineDeserializationTests
         
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
-        Assert.Null(emptyLine.Comment);
+        Assert.Null(emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -118,7 +118,7 @@ public sealed class EmptyLineDeserializationTests
         
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
-        Assert.Null(emptyLine.Comment);
+        Assert.Null(emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -142,7 +142,7 @@ public sealed class EmptyLineDeserializationTests
         
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
-        Assert.Equal(expectedComment, emptyLine.Comment);
+        Assert.Equal(expectedComment, emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -165,6 +165,6 @@ public sealed class EmptyLineDeserializationTests
         
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
-        Assert.Null(emptyLine.Comment);
+        Assert.Null(emptyLine.OriginalComment);
     }
 }

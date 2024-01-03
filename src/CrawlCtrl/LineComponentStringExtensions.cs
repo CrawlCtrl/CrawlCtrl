@@ -26,18 +26,15 @@ namespace CrawlCtrl
             {
                 return new LineComponents(
                     directive: null,
-                    trimmedDirective: null,
                     value: directiveSplit[0],
                     comment: comment
                 );
             }
 
             var directive = directiveSplit[0];
-            var trimmedDirective = directive.Trim();
             
             return new LineComponents(
                 directive: directive,
-                trimmedDirective: trimmedDirective,
                 value: directiveSplit[1],
                 comment: comment
             );
@@ -46,16 +43,14 @@ namespace CrawlCtrl
     
     internal sealed class LineComponents
     {
-        public LineComponents(string directive, string trimmedDirective, string value, string comment)
+        public LineComponents(string directive, string value, string comment)
         {
             Directive = directive;
-            TrimmedDirective = trimmedDirective;
             Value = value;
             Comment = comment;
         }
 
         public string Directive { get; }
-        public string TrimmedDirective { get; }
         public string Value { get; }
         public string Comment { get; }
     }

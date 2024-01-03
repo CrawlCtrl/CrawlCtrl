@@ -14,7 +14,7 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: value);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.OriginalDirective);
@@ -29,7 +29,7 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: value);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.Directive);
@@ -43,7 +43,7 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(directive: directive, sitemapValue: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(directive: directive, value: value));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -58,10 +58,24 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new InvalidSitemap(directive: directive, sitemapValue: value));
+        var exception = Assert.Throws<ArgumentException>(() => new InvalidSitemap(directive: directive, value: value));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
+    }
+    
+    [Fact]
+    public void WHEN_Create_without_directive_THEN_Original_directive_is_set_to_default()
+    {
+        // Arrange
+        const string sitemapValue = "Some value";
+        var expectedDirective = Constants.Directives.Sitemap;
+
+        // Act
+        var invalidSitemap = new InvalidSitemap(value: sitemapValue);
+
+        // Assert
+        Assert.Equal(expectedDirective, invalidSitemap.OriginalDirective);
     }
     
     [Fact]
@@ -72,7 +86,7 @@ public sealed class CreateInvalidSitemapTests
         var expectedDirective = Constants.Directives.Sitemap;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(sitemapValue: sitemapValue);
+        var invalidSitemap = new InvalidSitemap(value: sitemapValue);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.Directive);
@@ -83,14 +97,14 @@ public sealed class CreateInvalidSitemapTests
     [InlineData("  ")]
     [InlineData("Some random value")]
     [InlineData(" Some random value ")]
-    public void WHEN_Created_with_empty_value_THEN_Original_value_is_set_to_provided_value(string value)
+    public void WHEN_Created_with_value_THEN_Original_value_is_set_to_provided_value(string value)
     {
         // Arrange
         const string directive = "testdirective";
         var expectedValue = value;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: expectedValue);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: expectedValue);
 
         // Assert
         Assert.Equal(expectedValue, invalidSitemap.OriginalValue);
@@ -101,16 +115,16 @@ public sealed class CreateInvalidSitemapTests
     [InlineData("  ", "")]
     [InlineData("Some random value", "Some random value")]
     [InlineData(" Some random value ", "Some random value")]
-    public void WHEN_Created_with_empty_value_THEN_Value_is_set_to_whitespace_trimmed_value(string value, string expectedValue)
+    public void WHEN_Created_with_value_THEN_Value_is_set_to_whitespace_trimmed_value(string value, string expectedValue)
     {
         // Arrange
         const string directive = "testdirective";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: expectedValue);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: expectedValue);
 
         // Assert
-        Assert.Equal(expectedValue, invalidSitemap.Value);
+        Assert.Equal(expectedValue, invalidSitemap.OriginalValue);
     }
     
     [Fact]
@@ -121,25 +135,24 @@ public sealed class CreateInvalidSitemapTests
         const string? value = null;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(directive: directive, sitemapValue: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(directive: directive, value: value));
 
         // Assert
         Assert.Equal("value", exception.ParamName);
     }
     
-    [Theory]
-    [InlineData("")]
-    [InlineData("  ")]
-    public void WHEN_Created_with_empty_value_THEN_Throw_exception(string value)
+    [Fact]
+    public void WHEN_Created_without_comment_THEN_Original_comment_is_not_set()
     {
         // Arrange
         const string directive = "testdirective";
-        
+        const string value = "Some value";
+
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new InvalidSitemap(directive: directive, sitemapValue: value));
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value);
         
         // Assert
-        Assert.Equal("value", exception.ParamName);
+        Assert.Null(invalidSitemap.OriginalComment);
     }
     
     [Fact]
@@ -150,7 +163,7 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: value);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value);
         
         // Assert
         Assert.Null(invalidSitemap.Comment);
@@ -170,7 +183,7 @@ public sealed class CreateInvalidSitemapTests
         var expectedComment = comment;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: value, comment: comment);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value, comment: comment);
 
         // Assert
         Assert.Equal(expectedComment, invalidSitemap.OriginalComment);
@@ -189,7 +202,7 @@ public sealed class CreateInvalidSitemapTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, sitemapValue: value, comment: comment);
+        var invalidSitemap = new InvalidSitemap(directive: directive, value: value, comment: comment);
 
         // Assert
         Assert.Equal(expectedComment, invalidSitemap.Comment);

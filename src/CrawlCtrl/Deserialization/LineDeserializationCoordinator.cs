@@ -37,9 +37,12 @@ namespace CrawlCtrl.Deserialization
                 return _options.IncludeInvalidLines ? new InvalidLine(lineComponents.Value, lineComponents.Comment) : null;
             }
 
-            if (LineDeserializers.TryGetValue(lineComponents.Directive.ToLower(), out var lineDeserializer))
+            var sanitizedDirective = lineComponents.Directive.Trim().ToLower();
+
+            if (LineDeserializers.TryGetValue(sanitizedDirective, out var lineDeserializer))
             {
                 var deserializedLine = lineDeserializer.Deserialize(
+                    lineComponents.Directive,
                     lineComponents.Value,
                     lineComponents.Comment
                 );

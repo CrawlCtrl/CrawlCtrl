@@ -28,7 +28,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default);
+        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default, default);
     }
 
     [Fact]
@@ -51,11 +51,35 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default);
+        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default, default);
+    }
+    
+    [Fact]
+    public void WHEN_Line_has_directive_WHILE_Deserializer_exists_for_directive_THEN_Pass_raw_directive_to_deserializer()
+    {
+        // Arrange
+        var lineDeserializers = new Dictionary<string, ILineDeserializer<Line>>
+        {
+            { "test-directive", _deserializerMock }
+        };
+        
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: lineDeserializers,
+            options: new RobotsDeserializerOptions()
+        );
+
+        const string line = " test-directive: test-value # test comment";
+        const string expectedDirective = " test-directive";
+        
+        // Act
+        coordinator.Deserialize(line);
+
+        // Assert
+        _deserializerMock.Received(1).Deserialize(expectedDirective, Arg.Any<string>(), Arg.Any<string>());
     }
 
     [Fact]
-    public void WHEN_Line_has_value_WHILE_Deserializer_exists_for_directive_THEN_Pass_value_unchanged_to_deserializer()
+    public void WHEN_Line_has_value_WHILE_Deserializer_exists_for_directive_THEN_Pass_raw_value_to_deserializer()
     {
         // Arrange
         var lineDeserializers = new Dictionary<string, ILineDeserializer<Line>>
@@ -75,11 +99,11 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(expectedValue, Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedValue, Arg.Any<string>());
     }
     
     [Fact]
-    public void WHEN_Line_has_comment_WHILE_Deserializer_exists_for_directive_THEN_Pass_comment_unchanged_to_deserializer()
+    public void WHEN_Line_has_comment_WHILE_Deserializer_exists_for_directive_THEN_Pass_raw_comment_to_deserializer()
     {
         // Arrange
         var lineDeserializers = new Dictionary<string, ILineDeserializer<Line>>
@@ -102,10 +126,40 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedComment);
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), expectedComment);
+    }
+
+    [Theory]
+    [InlineData("test-directive: test-value # test comment")]
+    [InlineData(" test-directive: test-value # test comment")]
+    [InlineData("test-directive : test-value # test comment")]
+    [InlineData(" test-directive : test-value # test comment")]
+    [InlineData(" TEST-directive : test-value # test comment")]
+    public void WHEN_Line_has_directive_THEN_Use_trimmed_and_lower_case_directive_to_identify_deserializer(string line)
+    {
+        // Arrange
+        var lineDeserializers = new Dictionary<string, ILineDeserializer<Line>>
+        {
+            { "test-directive", _deserializerMock }
+        };
+        
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: lineDeserializers,
+            options: new RobotsDeserializerOptions()
+        );
+        
+        // Act
+        coordinator.Deserialize(line);
+
+        // Assert
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
     }
 
     public sealed class TestLine : Line
     {
+        public TestLine(string value, string originalComment = null) : base(value, originalComment)
+        {
+            
+        }
     }
 }

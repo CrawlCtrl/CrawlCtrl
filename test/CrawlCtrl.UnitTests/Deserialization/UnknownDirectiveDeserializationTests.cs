@@ -68,7 +68,7 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedDirective, unknownDirective.Directive);
+        Assert.Equal(expectedDirective, unknownDirective.OriginalDirective);
     }
 
     [Theory]
@@ -92,7 +92,7 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedValue, unknownDirective.Value);
+        Assert.Equal(expectedValue, unknownDirective.OriginalValue);
     }
     
     [Fact]
@@ -115,7 +115,7 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.Comment);
+        Assert.Null(unknownDirective.OriginalComment);
     }
     
     [Fact]
@@ -138,7 +138,7 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.Comment);
+        Assert.Null(unknownDirective.OriginalComment);
     }
     
     [Fact]
@@ -162,7 +162,7 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedComment, unknownDirective.Comment);
+        Assert.Equal(expectedComment, unknownDirective.OriginalComment);
     }
     
     [Fact]
@@ -185,6 +185,6 @@ public sealed class UnknownDirectiveDeserializationTests
         
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.Comment);
+        Assert.Null(unknownDirective.OriginalComment);
     }
 }

@@ -57,36 +57,12 @@ public sealed class SplittingLineIntoComponentsTests
         // Arrange
         const string line = " sIteMap : https://www.example.com/sitemap.xml";
         const string expectedDirective = " sIteMap ";
-        const string expectedTrimmedDirective = "sIteMap";
         
         // Act
         var lineComponents = line.SplitIntoLineComponents(includeComment: false);
         
         // Assert
         Assert.Equal(expectedDirective, lineComponents.Directive);
-        Assert.Equal(expectedTrimmedDirective, lineComponents.TrimmedDirective);
-    }
-    
-    [Theory]
-    [InlineData(": https://www.example.com/sitemap.xml", "")]
-    [InlineData("  : https://www.example.com/sitemap.xml", "")]
-    [InlineData("sitemap: https://www.example.com/sitemap.xml", "sitemap")]
-    [InlineData("  sitemap: https://www.example.com/sitemap.xml", "sitemap")]
-    [InlineData("sitemap  : https://www.example.com/sitemap.xml", "sitemap")]
-    [InlineData("  sitemap  : https://www.example.com/sitemap.xml", "sitemap")]
-    [InlineData("sIteMap: https://www.example.com/sitemap.xml", "sIteMap")]
-    public void WHEN_Line_has_directive_THEN_Trimmed_directive_has_no_leading_and_or_trailing_whitespaces(
-        string line,
-        string expectedTrimmedDirective
-    )
-    {
-        // Arrange
-        
-        // Act
-        var lineComponents = line.SplitIntoLineComponents(includeComment: false);
-        
-        // Assert
-        Assert.Equal(expectedTrimmedDirective, lineComponents.TrimmedDirective);
     }
 
     [Theory]
@@ -130,19 +106,6 @@ public sealed class SplittingLineIntoComponentsTests
         
         // Assert
         Assert.Null(lineComponents.Directive);
-    }
-    
-    [Fact]
-    public void WHEN_Line_has_no_directive_THEN_Trimmed_directive_is_not_set_in_split_result()
-    {
-        // Arrange
-        const string line = "Hello, World!";
-        
-        // Act
-        var lineComponents = line.SplitIntoLineComponents(includeComment: false);
-        
-        // Assert
-        Assert.Null(lineComponents.TrimmedDirective);
     }
     
     [Theory]

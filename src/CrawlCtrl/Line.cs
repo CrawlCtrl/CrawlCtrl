@@ -1,16 +1,19 @@
+using System;
+
 namespace CrawlCtrl
 {
     public abstract class Line
     {
-        protected Line(string value, string comment = null)
+        protected Line(string value, string originalComment = null)
         {
-            Comment = comment;
+            OriginalValue = value ?? throw new ArgumentNullException(nameof(value));
+            OriginalComment = originalComment;
         }
         
-        public string Value { get; }
-        public string TrimmedValue => Value.Trim();
+        public string OriginalValue { get; }
+        public string Value => OriginalValue.Trim();
 
-        public string Comment { get; }
-        public string TrimmedComment => Comment?.Trim();
+        public string OriginalComment { get; }
+        public string Comment => OriginalComment?.Trim();
     }
 }
