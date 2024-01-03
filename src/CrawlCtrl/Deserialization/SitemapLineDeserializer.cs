@@ -14,8 +14,13 @@ namespace CrawlCtrl.Deserialization
         private bool ReturnValidSitemaps => _inclusionScope == InclusionScope.All || _inclusionScope == InclusionScope.ValidOnly;
         private bool ReturnInvalidSitemaps => _inclusionScope == InclusionScope.All || _inclusionScope == InclusionScope.InvalidOnly;
 
-        public Sitemap Deserialize(string value, string comment)
+        public Sitemap Deserialize(string directive, string value, string comment)
         {
+            if (directive is null)
+            {
+                throw new ArgumentNullException(nameof(directive));
+            }
+            
             if (value is null)
             {
                 throw new ArgumentNullException(nameof(value));
@@ -25,10 +30,10 @@ namespace CrawlCtrl.Deserialization
 
             if (Uri.TryCreate(trimmedValue, UriKind.Absolute, out var sitemapUri))
             {
-                return ReturnValidSitemaps ? new ValidSitemap(sitemapUri, comment) : null;
+                return ReturnValidSitemaps ? new ValidSitemap(directive: directive, value: value, sitemapUri: sitemapUri, comment: comment) : null;
             }
 
-            return ReturnInvalidSitemaps ? new InvalidSitemap(value, comment) : null;
+            return ReturnInvalidSitemaps ? new InvalidSitemap(directive: directive, value: value, comment: comment) : null;
         }
     }
 }

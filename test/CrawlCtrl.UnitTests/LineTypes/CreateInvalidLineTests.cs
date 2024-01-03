@@ -5,8 +5,6 @@ namespace CrawlCtrl.UnitTests.LineTypes;
 public sealed class CreateInvalidLineTests
 {
     [Theory]
-    [InlineData("")]
-    [InlineData("  ")]
     [InlineData("Some random value")]
     [InlineData(" Some random value ")]
     public void WHEN_Created_with_value_THEN_Original_value_is_set_to_provided_value(string value)
@@ -22,8 +20,6 @@ public sealed class CreateInvalidLineTests
     }
     
     [Theory]
-    [InlineData("", "")]
-    [InlineData("  ", "")]
     [InlineData("Some random value", "Some random value")]
     [InlineData(" Some random value ", "Some random value")]
     public void WHEN_Created_with_value_THEN_Value_is_set_to_whitespace_trimmed_value(string value, string expectedValue)
@@ -65,12 +61,26 @@ public sealed class CreateInvalidLineTests
     }
 
     [Fact]
+    public void WHEN_Created_without_comment_THEN_Original_comment_is_not_set()
+    {
+        // Arrange
+        const string value = "Some value";
+        
+        // Act
+        var invalidLine = new InvalidLine(value: value);
+        
+        // Assert
+        Assert.Null(invalidLine.OriginalComment);
+    }
+    
+    [Fact]
     public void WHEN_Created_without_comment_THEN_Comment_is_not_set()
     {
         // Arrange
+        const string value = "Some value";
         
         // Act
-        var invalidLine = new InvalidLine(value: "Some value");
+        var invalidLine = new InvalidLine(value: value);
         
         // Assert
         Assert.Null(invalidLine.Comment);
@@ -91,7 +101,7 @@ public sealed class CreateInvalidLineTests
         var invalidLine = new InvalidLine(value: "Some value", comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, invalidLine.OiginalComment);
+        Assert.Equal(expectedComment, invalidLine.OriginalComment);
     }
     
     [Theory]

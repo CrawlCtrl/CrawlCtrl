@@ -72,7 +72,7 @@ public sealed class InvalidLineDeserializationTests
         
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
-        Assert.Equal(expectedValue, invalidLine.Value);
+        Assert.Equal(expectedValue, invalidLine.OriginalValue);
     }
     
     [Fact]
@@ -95,7 +95,7 @@ public sealed class InvalidLineDeserializationTests
         
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
-        Assert.Null(invalidLine.Comment);
+        Assert.Null(invalidLine.OriginalComment);
     }
     
     [Fact]
@@ -118,7 +118,7 @@ public sealed class InvalidLineDeserializationTests
         
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
-        Assert.Null(invalidLine.Comment);
+        Assert.Null(invalidLine.OriginalComment);
     }
     
     [Fact]
@@ -142,7 +142,7 @@ public sealed class InvalidLineDeserializationTests
         
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
-        Assert.Equal(expectedComment, invalidLine.Comment);
+        Assert.Equal(expectedComment, invalidLine.OriginalComment);
     }
     
     [Fact]
@@ -165,6 +165,6 @@ public sealed class InvalidLineDeserializationTests
         
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
-        Assert.Null(invalidLine.Comment);
+        Assert.Null(invalidLine.OriginalComment);
     }
 }

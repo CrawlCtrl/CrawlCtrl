@@ -4,21 +4,12 @@ namespace CrawlCtrl
 {
     public sealed class EmptyLine : Line
     {
-        public EmptyLine(string value, string comment = null) : base(comment)
+        public EmptyLine(string value, string comment = null) : base(value, comment)
         {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
             if (string.IsNullOrWhiteSpace(value) is false)
             {
-                throw new ArgumentException("The string must be empty or consist of only whitespaces.", nameof(value));
+                throw new ArgumentException("The argument must be empty or contain only whitespaces.", nameof(value));
             }
-
-            Value = value;
         }
-        
-        public string Value { get; }
     }
 }
