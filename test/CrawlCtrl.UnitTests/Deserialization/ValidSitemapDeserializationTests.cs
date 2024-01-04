@@ -88,7 +88,7 @@ public sealed class ValidSitemapDeserializationTests
         // Assert
         var validSitemap = Assert.IsType<ValidSitemap>(deserializedSitemap);
         
-        Assert.Equal(expectedSitemapUri, validSitemap.SitemapUri);
+        Assert.Equal(expectedSitemapUri, validSitemap.Uri);
     }
     
     public static IEnumerable<object[]> WHEN_Value_is_valid_uri_THEN_Sitemap_uri_is_set_to_uri_DATA =>

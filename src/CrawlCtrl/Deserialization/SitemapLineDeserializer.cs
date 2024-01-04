@@ -26,11 +26,9 @@ namespace CrawlCtrl.Deserialization
                 throw new ArgumentNullException(nameof(value));
             }
 
-            var trimmedValue = value.Trim();
-
-            if (Uri.TryCreate(trimmedValue, UriKind.Absolute, out var sitemapUri))
+            if (Uri.TryCreate(value, UriKind.Absolute, out var sitemapUri))
             {
-                return ReturnValidSitemaps ? new ValidSitemap(directive: directive, value: value, sitemapUri: sitemapUri, comment: comment) : null;
+                return ReturnValidSitemaps ? new ValidSitemap(directive: directive, uri: sitemapUri, comment: comment) : null;
             }
 
             return ReturnInvalidSitemaps ? new InvalidSitemap(directive: directive, value: value, comment: comment) : null;

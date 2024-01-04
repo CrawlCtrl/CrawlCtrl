@@ -4,20 +4,15 @@ namespace CrawlCtrl
 {
     public sealed class ValidSitemap : Sitemap
     {
-        public ValidSitemap(Uri sitemapUri, string comment = null) : this(Constants.Directives.Sitemap, sitemapUri, comment)
+        public ValidSitemap(Uri uri, string comment = null) : this(Constants.Directives.Sitemap, uri, comment)
         {
         }
             
-        public ValidSitemap(string directive, Uri sitemapUri, string comment = null) : base(directive, sitemapUri?.AbsoluteUri, comment)
+        public ValidSitemap(string directive, Uri uri, string comment = null) : base(directive, uri?.OriginalString ?? string.Empty, comment)
         {
-            SitemapUri = sitemapUri ?? throw new ArgumentNullException(nameof(sitemapUri));
-        }
-        
-        internal ValidSitemap(string directive, string value, Uri sitemapUri, string comment = null) : base(directive, value, comment)
-        {
-            SitemapUri = sitemapUri ?? throw new ArgumentNullException(nameof(sitemapUri));
+            Uri = uri ?? throw new ArgumentNullException(nameof(uri));
         }
 
-        public Uri SitemapUri { get; }
+        public Uri Uri { get; }
     }
 }
