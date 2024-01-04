@@ -15,26 +15,26 @@ internal static class RobotsTestData
         new UnknownDirective("Disallow", " /disallowed/"),
         new UnknownDirective("Allow", " /disallowed/allowed-anyways"),
         new EmptyLine(""),
-        new ValidSitemap("Sitemap", " https://www.example.com/sitemap_index.xml", new Uri("https://www.example.com/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/en/sitemap_index.xml", new Uri("https://www.example.com/en/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/da/sitemap_index.xml", new Uri("https://www.example.com/da/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/de/sitemap_index.xml", new Uri("https://www.example.com/de/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/es/sitemap_index.xml", new Uri("https://www.example.com/es/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/fr/sitemap_index.xml", new Uri("https://www.example.com/fr/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/it/sitemap_index.xml", new Uri("https://www.example.com/it/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/sitemap.xml", new Uri("https://www.example.com/sitemap.xml"))
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/en/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/da/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/de/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/es/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/fr/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/it/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/sitemap.xml"))
     }.AsReadOnly();
     
     public static IReadOnlyList<Line> OnlySitemapsRobotsTxt = new List<Line>
     {
-        new ValidSitemap("Sitemap", " https://www.example.com/sitemap_index.xml", new Uri("https://www.example.com/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/en/sitemap_index.xml", new Uri("https://www.example.com/en/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/da/sitemap_index.xml", new Uri("https://www.example.com/da/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/de/sitemap_index.xml", new Uri("https://www.example.com/de/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/es/sitemap_index.xml", new Uri("https://www.example.com/es/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/fr/sitemap_index.xml", new Uri("https://www.example.com/fr/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/it/sitemap_index.xml", new Uri("https://www.example.com/it/sitemap_index.xml")),
-        new ValidSitemap("Sitemap", " https://www.example.com/sitemap.xml", new Uri("https://www.example.com/sitemap.xml"))
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/en/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/da/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/de/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/es/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/fr/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/it/sitemap_index.xml")),
+        new ValidSitemap("Sitemap", new Uri(" https://www.example.com/sitemap.xml"))
     }.AsReadOnly();
 
     public static StreamReader GetEmptyRobotsStreamReader() => GetStreamReaderForFile("./robots_empty.txt");
