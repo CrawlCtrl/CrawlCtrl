@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test;
+namespace CrawlCtrl.DependencyInjection.DotNet.UnitTests;
 
 public sealed class DependencyInjectionTests
 {

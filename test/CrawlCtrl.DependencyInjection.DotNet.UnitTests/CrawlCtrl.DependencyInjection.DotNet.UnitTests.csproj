@@ -18,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\CrawlCtrl.Extensions.Microsoft.DependencyInjection\CrawlCtrl.Extensions.Microsoft.DependencyInjection.csproj" />
+      <ProjectReference Include="..\..\src\CrawlCtrl.DependencyInjection.DotNet\CrawlCtrl.DependencyInjection.DotNet.csproj" />
     </ItemGroup>
 
 </Project>
