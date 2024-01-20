@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test;
+namespace CrawlCtrl.Reader.DependencyInjection.DotNet.UnitTests;
 
 public sealed class DependencyInjectionTests
 {
@@ -12,7 +12,7 @@ public sealed class DependencyInjectionTests
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddCrawlCtrl();
+        serviceCollection.AddCrawlCtrlReader();
         
         // Assert
         serviceCollection.BuildServiceProvider(new ServiceProviderOptions

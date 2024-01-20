@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
-        <Title>CrawlCtrl</Title>
-        <Description>Deserialize robots.txt files</Description>
+        <Title>CrawlCtrl.Reader.DependencyInjection.DotNet</Title>
+        <Description>.NET dependency injection support for CrawlCtrl.Reader</Description>
         <Authors>CrawlCtrl Contributors, Michel Gammelgaard</Authors>
         <Company>Acidus</Company>
         <Copyright>Copyright (c) Acidus 2024</Copyright>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <PackageTags>robots.txt;robots;crawler;crawling;sitemap</PackageTags>
+        <PackageTags>robots.txt;robots;crawler;crawling;sitemap;di;dependency injection;reader</PackageTags>
         <PackageProjectUrl>https://github.com/CrawlCtrl/CrawlCtrl</PackageProjectUrl>
         <PackageIcon>icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/CrawlCtrl/CrawlCtrl</RepositoryUrl>
@@ -16,9 +16,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+      <ProjectReference Include="..\CrawlCtrl.Extensions.Microsoft.DependencyInjection\CrawlCtrl.Extensions.Microsoft.DependencyInjection.csproj" />
+      <ProjectReference Include="..\CrawlCtrl.Reader\CrawlCtrl.Reader.csproj" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <None Include="../../assets/icon.png" Pack="true" PackagePath="\" Visible="false" />
     </ItemGroup>
