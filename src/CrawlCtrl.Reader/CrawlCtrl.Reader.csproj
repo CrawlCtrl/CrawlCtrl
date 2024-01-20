@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net462;netstandard2.0;netstandard2.1</TargetFrameworks>
         <Title>CrawlCtrl.Reader</Title>
         <Description>Convenient wrapper for the CrawlCtrl deserializer, that makes it easy to load and deserialize robots.txt files</Description>
         <Authors>CrawlCtrl Contributors, Michel Gammelgaard</Authors>

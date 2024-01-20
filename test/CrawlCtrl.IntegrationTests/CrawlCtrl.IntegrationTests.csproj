@@ -29,11 +29,9 @@
       <Content Update="robots_empty.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <None Remove="robots_empty.txt" />
       <Content Include="robots_empty.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <None Remove="robots_only_sitemaps.txt" />
       <Content Include="robots_only_sitemaps.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
