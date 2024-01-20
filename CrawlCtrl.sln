@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Extensions.Micros
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test", "test\CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test\CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test.csproj", "{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader", "src\CrawlCtrl.Reader\CrawlCtrl.Reader.csproj", "{8A72EACD-45F9-4AEA-8EFF-26C5B75398B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader.UnitTests", "test\CrawlCtrl.Reader.UnitTests\CrawlCtrl.Reader.UnitTests.csproj", "{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,13 @@ Global
 		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A72EACD-45F9-4AEA-8EFF-26C5B75398B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A72EACD-45F9-4AEA-8EFF-26C5B75398B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A72EACD-45F9-4AEA-8EFF-26C5B75398B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A72EACD-45F9-4AEA-8EFF-26C5B75398B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <Authors>CrawlCtrl Contributors, Michel Gammelgaard</Authors>
+        <Company>Acidus</Company>
+        <Description>Convenient wrapper for the CrawlCtrl deserializer, that makes it easy to load and deserialize robots.txt files.</Description>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageTags>robots.txt;robots;crawler;crawling;sitemap</PackageTags>
+        <Title>CrawlCtrl.Reader</Title>
+        <Copyright>Copyright (c) Acidus 2023</Copyright>
+        <PackageProjectUrl>https://github.com/CrawlCtrl/CrawlCtrl</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/CrawlCtrl/CrawlCtrl</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../assets/icon.png" Pack="true" PackagePath="\" Visible="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CrawlCtrl\CrawlCtrl.csproj" />
+    </ItemGroup>
+
+</Project>
