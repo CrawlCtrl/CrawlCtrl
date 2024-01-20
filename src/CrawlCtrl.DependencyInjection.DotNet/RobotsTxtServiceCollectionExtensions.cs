@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
+// ReSharper disable once CheckNamespace
 namespace CrawlCtrl
 {
     public static class CrawlCtrlServiceCollectionExtensions
