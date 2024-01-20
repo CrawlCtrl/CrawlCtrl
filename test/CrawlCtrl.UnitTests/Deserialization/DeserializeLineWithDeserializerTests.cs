@@ -157,7 +157,7 @@ public sealed class DeserializeLineWithDeserializerTests
 
     public sealed class TestLine : Line
     {
-        public TestLine(string value, string originalComment = null) : base(value, originalComment)
+        public TestLine(string value, string? originalComment = null) : base(value, originalComment)
         {
             
         }

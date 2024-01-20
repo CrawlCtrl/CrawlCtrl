@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.IntegrationTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.UnitTests", "test\CrawlCtrl.UnitTests\CrawlCtrl.UnitTests.csproj", "{257C71A6-655D-42C6-9CC1-25BBA7BE5CAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Extensions.Microsoft.DependencyInjection", "src\CrawlCtrl.Extensions.Microsoft.DependencyInjection\CrawlCtrl.Extensions.Microsoft.DependencyInjection.csproj", "{38AA5550-CC5E-4577-98DC-A4EC000651F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test", "test\CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test\CrawlCtrl.Extensions.Microsoft.DependencyInjection.Test.csproj", "{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{257C71A6-655D-42C6-9CC1-25BBA7BE5CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{257C71A6-655D-42C6-9CC1-25BBA7BE5CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{257C71A6-655D-42C6-9CC1-25BBA7BE5CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AA5550-CC5E-4577-98DC-A4EC000651F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AA5550-CC5E-4577-98DC-A4EC000651F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AA5550-CC5E-4577-98DC-A4EC000651F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AA5550-CC5E-4577-98DC-A4EC000651F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2AD4BB5-64AB-488B-B89D-2F85B41173FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

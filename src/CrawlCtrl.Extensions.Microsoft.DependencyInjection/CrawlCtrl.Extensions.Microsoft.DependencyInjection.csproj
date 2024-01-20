@@ -4,10 +4,10 @@
         <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
         <Authors>CrawlCtrl Contributors, Michel Gammelgaard</Authors>
         <Company>Acidus</Company>
-        <Description>Deserialization of robots.txt files</Description>
+        <Description>Dependency injection extensions for CrawlCtrl</Description>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <PackageTags>robots.txt;robots;crawler;crawling;sitemap</PackageTags>
-        <Title>CrawlCtrl</Title>
+        <PackageTags>robots.txt;robots;crawler;crawling;sitemap;di;dependency injection</PackageTags>
+        <Title>CrawlCtrl.Extensions.Microsoft.DependencyInjection</Title>
         <Copyright>Copyright (c) Acidus 2023</Copyright>
         <PackageProjectUrl>https://github.com/CrawlCtrl/CrawlCtrl</PackageProjectUrl>
         <PackageIcon>icon.png</PackageIcon>
@@ -16,11 +16,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" Condition="'$(TargetFramework)' == 'NET462_OR_GREATER'" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <None Include="../../assets/icon.png" Pack="true" PackagePath="\" Visible="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CrawlCtrl\CrawlCtrl.csproj" />
     </ItemGroup>
 
 </Project>
