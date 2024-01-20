@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader", "src\Cra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader.UnitTests", "test\CrawlCtrl.Reader.UnitTests\CrawlCtrl.Reader.UnitTests.csproj", "{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader.DependencyInjection.DotNet", "src\CrawlCtrl.Reader.DependencyInjection.DotNet\CrawlCtrl.Reader.DependencyInjection.DotNet.csproj", "{9A407FCB-F8C8-411D-8B02-1114DC1FCC78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrawlCtrl.Reader.DependencyInjection.DotNet.UnitTests", "test\CrawlCtrl.Reader.DependencyInjection.DotNet.UnitTests\CrawlCtrl.Reader.DependencyInjection.DotNet.UnitTests.csproj", "{977DE979-4DFF-4635-8D7C-96F2799016A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F062B38C-D1ED-47F3-B5CA-973FDDC7222E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A407FCB-F8C8-411D-8B02-1114DC1FCC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A407FCB-F8C8-411D-8B02-1114DC1FCC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A407FCB-F8C8-411D-8B02-1114DC1FCC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A407FCB-F8C8-411D-8B02-1114DC1FCC78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977DE979-4DFF-4635-8D7C-96F2799016A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977DE979-4DFF-4635-8D7C-96F2799016A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977DE979-4DFF-4635-8D7C-96F2799016A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977DE979-4DFF-4635-8D7C-96F2799016A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
