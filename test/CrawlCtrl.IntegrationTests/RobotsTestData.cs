@@ -1,5 +1,3 @@
-using System.Collections.ObjectModel;
-
 namespace CrawlCtrl.IntegrationTests;
 
 internal static class RobotsTestData
@@ -14,7 +12,7 @@ internal static class RobotsTestData
         new UnknownDirective("User-agent", " *"),
         new UnknownDirective("Disallow", " /disallowed/"),
         new UnknownDirective("Allow", " /disallowed/allowed-anyways"),
-        new EmptyLine(""),
+        new EmptyLine("", comment: null),
         new ValidSitemap("Sitemap", new Uri(" https://www.example.com/sitemap_index.xml")),
         new ValidSitemap("Sitemap", new Uri(" https://www.example.com/en/sitemap_index.xml")),
         new ValidSitemap("Sitemap", new Uri(" https://www.example.com/da/sitemap_index.xml")),

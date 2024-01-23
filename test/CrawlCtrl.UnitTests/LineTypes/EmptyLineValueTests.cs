@@ -12,7 +12,7 @@ public sealed class EmptyLineValueTests
         // Arrange
 
         // Act
-        var emptyLine = new EmptyLine(value: value);
+        var emptyLine = new EmptyLine(value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedOriginalValue, emptyLine.OriginalValue);
@@ -26,7 +26,7 @@ public sealed class EmptyLineValueTests
         // Arrange
 
         // Act
-        var emptyLine = new EmptyLine(value: value);
+        var emptyLine = new EmptyLine(value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedValue, emptyLine.Value);
@@ -39,7 +39,7 @@ public sealed class EmptyLineValueTests
         const string? value = null;
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new EmptyLine(value: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new EmptyLine(value: value, comment: null));
         
         // Assert
         Assert.Equal("value", exception.ParamName);
@@ -52,7 +52,7 @@ public sealed class EmptyLineValueTests
         const string value = "Hello, World!";
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new EmptyLine(value: value));
+        var exception = Assert.Throws<ArgumentException>(() => new EmptyLine(value: value, comment: null));
         
         // Assert
         Assert.Equal("value", exception.ParamName);

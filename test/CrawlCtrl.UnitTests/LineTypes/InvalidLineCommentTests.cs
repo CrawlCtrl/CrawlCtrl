@@ -71,7 +71,7 @@ public sealed class InvalidLineCommentTests
         const string value = "Some value";
         
         // Act
-        var invalidLine = new InvalidLine(value: value);
+        var invalidLine = new InvalidLine(value: value, comment: null);
         
         // Assert
         Assert.Null(invalidLine.OriginalComment);
@@ -84,7 +84,7 @@ public sealed class InvalidLineCommentTests
         const string value = "Some value";
         
         // Act
-        var invalidLine = new InvalidLine(value: value);
+        var invalidLine = new InvalidLine(value: value, comment: null);
         
         // Assert
         Assert.Null(invalidLine.Comment);

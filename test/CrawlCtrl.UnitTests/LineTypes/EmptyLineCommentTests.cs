@@ -71,7 +71,7 @@ public sealed class EmptyLineCommentTests
         const string value = "";
         
         // Act
-        var emptyLine = new EmptyLine(value: value);
+        var emptyLine = new EmptyLine(value: value, comment: null);
         
         // Assert
         Assert.Null(emptyLine.OriginalComment);
@@ -84,7 +84,7 @@ public sealed class EmptyLineCommentTests
         const string value = "";
         
         // Act
-        var emptyLine = new EmptyLine(value: value);
+        var emptyLine = new EmptyLine(value: value, comment: null);
         
         // Assert
         Assert.Null(emptyLine.Comment);

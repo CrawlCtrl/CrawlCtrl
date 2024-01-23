@@ -4,7 +4,8 @@ namespace CrawlCtrl
 {
     public sealed class EmptyLine : Line
     {
-        public EmptyLine(string value, string comment = null) : base(value, comment)
+        public EmptyLine(string value, string comment = null, string fullLine = null)
+            : base(value, comment, fullLine)
         {
             if (string.IsNullOrWhiteSpace(value) is false)
             {
