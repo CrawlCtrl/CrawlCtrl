@@ -14,7 +14,7 @@ public sealed class InvalidLineValueTests
         // Arrange
 
         // Act
-        var invalidLine = new InvalidLine(value: value);
+        var invalidLine = new InvalidLine(value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedOriginalValue, invalidLine.OriginalValue);
@@ -30,7 +30,7 @@ public sealed class InvalidLineValueTests
         // Arrange
 
         // Act
-        var invalidLine = new InvalidLine(value: value);
+        var invalidLine = new InvalidLine(value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedValue, invalidLine.Value);
@@ -44,7 +44,7 @@ public sealed class InvalidLineValueTests
         // Arrange
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new InvalidLine(value: value));
+        var exception = Assert.Throws<ArgumentException>(() => new InvalidLine(value: value, comment: null));
         
         // Assert
         Assert.Equal("value", exception.ParamName);
@@ -57,7 +57,7 @@ public sealed class InvalidLineValueTests
         const string? value = null;
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidLine(value: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidLine(value: value, comment: null));
         
         // Assert
         Assert.Equal("value", exception.ParamName);

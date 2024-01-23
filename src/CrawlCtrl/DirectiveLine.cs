@@ -4,7 +4,8 @@ namespace CrawlCtrl
 {
     public abstract class DirectiveLine : Line
     {
-        protected DirectiveLine(string directive, string value, string comment = null) : base(value, comment)
+        protected DirectiveLine(string directive, string value, string comment, string fullLine)
+            : base(value, comment, fullLine)
         {
             if (directive is null)
             {
