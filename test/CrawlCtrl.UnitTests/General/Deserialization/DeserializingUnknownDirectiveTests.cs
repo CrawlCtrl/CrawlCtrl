@@ -1,9 +1,10 @@
 using CrawlCtrl.Deserialization;
+using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
 namespace CrawlCtrl.UnitTests.General.Deserialization;
 
-public sealed class UnknownDirectiveDeserializationTests
+public sealed class DeserializingUnknownDirectiveTests
 {
     [Theory]
     [InlineData("unknown:")]
@@ -186,5 +187,28 @@ public sealed class UnknownDirectiveDeserializationTests
         // Assert
         var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
         Assert.Null(unknownDirective.OriginalComment);
+    }
+
+    [Theory]
+    [InlineData("the-directive: the-value # The comment", "the-directive: the-value # The comment")]
+    [InlineData(" the-directive: the-value # The comment", " the-directive: the-value # The comment")]
+    [InlineData("the-directive: the-value # The comment ", "the-directive: the-value # The comment ")]
+    [InlineData(" the-directive: the-value # The comment ", " the-directive: the-value # The comment ")]
+    public void WHEN_Line_has_been_deserialized_THEN_Full_robots_txt_line_is_set(string line, string expectedFullLine)
+    {
+        // Arrange
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
+            options: new RobotsDeserializerOptions
+            {
+                IncludeUnknownDirectives = true
+            }
+        );
+        
+        // Act
+        var deserializedLine = coordinator.Deserialize(line);
+        
+        // Assert
+        Assert.Equal(expectedFullLine, deserializedLine.FullLine);
     }
 }

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace CrawlCtrl.UnitTests.General.Deserialization;
 
-public sealed class DeserializeLineWithDeserializerTests
+public sealed class DeserializingLineWithDeserializerTests
 {
     private readonly ILineDeserializer<TestLine> _deserializerMock = Substitute.For<ILineDeserializer<TestLine>>();
 
@@ -28,7 +28,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default, default);
+        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default, default, default);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default, default);
+        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default, default, default);
     }
     
     [Fact]
@@ -75,7 +75,32 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(expectedDirective, Arg.Any<string>(), Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(expectedDirective, Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+    }
+    
+    [Theory]
+    [InlineData("test-directive: test-value # Test comment", "test-directive: test-value # Test comment")]
+    [InlineData(" test-directive: test-value # Test comment", " test-directive: test-value # Test comment")]
+    [InlineData("test-directive: test-value # Test comment ", "test-directive: test-value # Test comment ")]
+    [InlineData(" test-directive: test-value # Test comment ", " test-directive: test-value # Test comment ")]
+    public void WHEN_Line_has_directive_WHILE_Deserializer_exists_for_directive_THEN_Pass_line_to_deserializer(string line, string expectedFullLine)
+    {
+        // Arrange
+        var lineDeserializers = new Dictionary<string, ILineDeserializer<Line>>
+        {
+            { "test-directive", _deserializerMock }
+        };
+        
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: lineDeserializers,
+            options: new RobotsDeserializerOptions()
+        );
+        
+        // Act
+        coordinator.Deserialize(line);
+
+        // Assert
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), expectedFullLine);
     }
 
     [Fact]
@@ -99,7 +124,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedValue, Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedValue, Arg.Any<string>(), Arg.Any<string>());
     }
     
     [Fact]
@@ -126,7 +151,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), expectedComment);
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), expectedComment, Arg.Any<string>());
     }
 
     [Theory]
@@ -152,7 +177,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
     }
 
     public sealed class TestLine : Line

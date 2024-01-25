@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CrawlCtrl.UnitTests.General.Deserialization;
 
-public sealed class InvalidLineDeserializationTests
+public sealed class DeserializingInvalidLineTests
 {
     [Theory]
     [InlineData("invalid")]
@@ -166,5 +166,28 @@ public sealed class InvalidLineDeserializationTests
         // Assert
         var invalidLine = Assert.IsType<InvalidLine>(deserializedLine);
         Assert.Null(invalidLine.OriginalComment);
+    }
+    
+    [Theory]
+    [InlineData("the-value # The comment", "the-value # The comment")]
+    [InlineData(" the-value # The comment", " the-value # The comment")]
+    [InlineData("the-value # The comment ", "the-value # The comment ")]
+    [InlineData(" the-value # The comment ", " the-value # The comment ")]
+    public void WHEN_Line_has_been_deserialized_THEN_Full_robots_txt_line_is_set(string line, string expectedFullLine)
+    {
+        // Arrange
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
+            options: new RobotsDeserializerOptions
+            {
+                IncludeInvalidLines = true
+            }
+        );
+        
+        // Act
+        var deserializedLine = coordinator.Deserialize(line);
+        
+        // Assert
+        Assert.Equal(expectedFullLine, deserializedLine.FullLine);
     }
 }
