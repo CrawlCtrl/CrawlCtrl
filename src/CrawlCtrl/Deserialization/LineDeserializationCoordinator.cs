@@ -29,12 +29,24 @@ namespace CrawlCtrl.Deserialization
 
             if (lineComponents.Directive is null && string.IsNullOrWhiteSpace(lineComponents.Value))
             {
-                return _options.IncludeEmptyLines ? new EmptyLine(lineComponents.Value, lineComponents.Comment) : null;
+                return _options.IncludeEmptyLines 
+                    ? new EmptyLine(
+                        value: lineComponents.Value,
+                        comment: lineComponents.Comment, 
+                        fullLine: line
+                    )
+                    : null;
             }
 
             if (lineComponents.Directive is null)
             {
-                return _options.IncludeInvalidLines ? new InvalidLine(lineComponents.Value, lineComponents.Comment) : null;
+                return _options.IncludeInvalidLines
+                    ? new InvalidLine(
+                        value: lineComponents.Value,
+                        comment: lineComponents.Comment,
+                        fullLine: line
+                    )
+                    : null;
             }
 
             var sanitizedDirective = lineComponents.Directive.Trim().ToLower();
@@ -44,7 +56,8 @@ namespace CrawlCtrl.Deserialization
                 var deserializedLine = lineDeserializer.Deserialize(
                     lineComponents.Directive,
                     lineComponents.Value,
-                    lineComponents.Comment
+                    lineComponents.Comment,
+                    line
                 );
 
                 return deserializedLine;
@@ -53,7 +66,8 @@ namespace CrawlCtrl.Deserialization
             return _options.IncludeUnknownDirectives ? new UnknownDirective(
                 directive: lineComponents.Directive,
                 value: lineComponents.Value,
-                comment: lineComponents.Comment
+                comment: lineComponents.Comment,
+                fullLine: line
             ) : null;
         }
     }

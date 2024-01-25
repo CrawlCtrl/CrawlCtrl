@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CrawlCtrl.UnitTests.General.Deserialization;
 
-public sealed class EmptyLineDeserializationTests
+public sealed class DeserializingEmptyLineTests
 {
     [Theory]
     [InlineData("")]
@@ -166,5 +166,28 @@ public sealed class EmptyLineDeserializationTests
         // Assert
         var emptyLine = Assert.IsType<EmptyLine>(deserializedLine);
         Assert.Null(emptyLine.OriginalComment);
+    }
+    
+    [Theory]
+    [InlineData("# The comment", "# The comment")]
+    [InlineData(" # The comment", " # The comment")]
+    [InlineData("# The comment ", "# The comment ")]
+    [InlineData(" # The comment ", " # The comment ")]
+    public void WHEN_Line_has_been_deserialized_THEN_Full_robots_txt_line_is_set(string line, string expectedFullLine)
+    {
+        // Arrange
+        var coordinator = new LineDeserializationCoordinator(
+            lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
+            options: new RobotsDeserializerOptions
+            {
+                IncludeEmptyLines = true
+            }
+        );
+        
+        // Act
+        var deserializedLine = coordinator.Deserialize(line);
+        
+        // Assert
+        Assert.Equal(expectedFullLine, deserializedLine.FullLine);
     }
 }
