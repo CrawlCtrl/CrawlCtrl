@@ -1,22 +1,22 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General;
+namespace CrawlCtrl.UnitTests.LineTypes.InvalidSitemap;
 
-public sealed class EmptyLineCommentTests
+public sealed class InvalidSitemapCommentTests
 {
     [Theory]
     [MemberData(nameof(CommentTestData.OriginalCommentTestData), MemberType = typeof(CommentTestData))]
     public void WHEN_Created_with_comment_THEN_Original_comment_is_set_to_provided_value(string comment, string expectedOriginalComment)
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
 
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: comment);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedOriginalComment, emptyLine.OriginalComment);
+        Assert.Equal(expectedOriginalComment, invalidSitemap.OriginalComment);
     }
     
     [Theory]
@@ -24,70 +24,70 @@ public sealed class EmptyLineCommentTests
     public void WHEN_Created_with_comment_THEN_Comment_is_set_to_whitespace_trimmed_value(string comment, string expectedComment)
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
 
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: comment);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, emptyLine.Comment);
+        Assert.Equal(expectedComment, invalidSitemap.Comment);
     }
     
     [Fact]
     public void WHEN_Created_with_null_comment_THEN_Original_comment_is_null()
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
         const string? comment = null;
 
         const string? expectedComment = null;
 
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: comment);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, emptyLine.OriginalComment);
+        Assert.Equal(expectedComment, invalidSitemap.OriginalComment);
     }
 
     [Fact]
     public void WHEN_Created_with_null_comment_THEN_Comment_is_null()
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
         const string? comment = null;
 
         const string? expectedComment = null;
 
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: comment);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, emptyLine.Comment);
+        Assert.Equal(expectedComment, invalidSitemap.Comment);
     }
     
     [Fact]
     public void WHEN_Created_without_comment_THEN_Original_comment_is_null()
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
         
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: null);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
         
         // Assert
-        Assert.Null(emptyLine.OriginalComment);
+        Assert.Null(invalidSitemap.OriginalComment);
     }
     
     [Fact]
     public void WHEN_Created_without_comment_THEN_Comment_is_null()
     {
         // Arrange
-        const string value = "";
+        const string value = "Some value";
         
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: null);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
         
         // Assert
-        Assert.Null(emptyLine.Comment);
+        Assert.Null(invalidSitemap.Comment);
     }
 }

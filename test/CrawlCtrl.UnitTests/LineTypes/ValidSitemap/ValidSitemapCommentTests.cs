@@ -1,7 +1,7 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.ValidSitemap;
 
 public sealed class ValidSitemapCommentTests
 {
@@ -13,7 +13,7 @@ public sealed class ValidSitemapCommentTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri, comment: comment);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri, comment: comment);
 
         // Assert
         Assert.Equal(expectedOriginalComment, validSitemap.OriginalComment);
@@ -27,7 +27,7 @@ public sealed class ValidSitemapCommentTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri, comment: comment);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri, comment: comment);
 
         // Assert
         Assert.Equal(expectedComment, validSitemap.Comment);
@@ -43,7 +43,7 @@ public sealed class ValidSitemapCommentTests
         const string? expectedComment = null;
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri, comment: comment);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri, comment: comment);
 
         // Assert
         Assert.Equal(expectedComment, validSitemap.OriginalComment);
@@ -59,7 +59,7 @@ public sealed class ValidSitemapCommentTests
         const string? expectedComment = null;
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri, comment: comment);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri, comment: comment);
 
         // Assert
         Assert.Equal(expectedComment, validSitemap.Comment);
@@ -72,7 +72,7 @@ public sealed class ValidSitemapCommentTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
         
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
         
         // Assert
         Assert.Null(validSitemap.OriginalComment);
@@ -85,7 +85,7 @@ public sealed class ValidSitemapCommentTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
         
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
         
         // Assert
         Assert.Null(validSitemap.Comment);

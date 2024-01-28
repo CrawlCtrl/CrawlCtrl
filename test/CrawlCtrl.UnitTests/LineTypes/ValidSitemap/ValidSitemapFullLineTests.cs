@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.ValidSitemap;
 
 public sealed class ValidSitemapFullLineTests
 {
@@ -12,7 +12,7 @@ public sealed class ValidSitemapFullLineTests
         var sitemapUri = new Uri("https://www.example.com/sitemap.xml");
         
         // Act
-        var validSitemap = new ValidSitemap(directive: directive, uri: sitemapUri, comment: null);
+        var validSitemap = new CrawlCtrl.ValidSitemap(directive: directive, uri: sitemapUri, comment: null);
 
         // Assert
         Assert.Null(validSitemap.FullLine);
@@ -27,7 +27,7 @@ public sealed class ValidSitemapFullLineTests
         const string? fullLine = null;
         
         // Act
-        var validSitemap = new ValidSitemap(directive: directive, uri: sitemapUri, fullLine: fullLine);
+        var validSitemap = new CrawlCtrl.ValidSitemap(directive: directive, uri: sitemapUri, fullLine: fullLine);
 
         // Assert
         Assert.Null(validSitemap.FullLine);
@@ -44,7 +44,7 @@ public sealed class ValidSitemapFullLineTests
         const string expectedFullLine = "Sitemap: Invalid ";
         
         // Act
-        var validSitemap = new ValidSitemap(directive: directive, uri: sitemapUri, fullLine: fullLine);
+        var validSitemap = new CrawlCtrl.ValidSitemap(directive: directive, uri: sitemapUri, fullLine: fullLine);
 
         // Assert
         Assert.Equal(expectedFullLine, validSitemap.FullLine);

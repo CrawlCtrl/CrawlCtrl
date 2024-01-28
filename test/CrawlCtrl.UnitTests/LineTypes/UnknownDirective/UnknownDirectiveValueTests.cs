@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General;
+namespace CrawlCtrl.UnitTests.LineTypes.UnknownDirective;
 
 public sealed class UnknownDirectiveValueTests
 {
@@ -17,7 +17,7 @@ public sealed class UnknownDirectiveValueTests
         const string directive = "directive";
 
         // Act
-        var unknownDirective = new UnknownDirective(directive: directive, value: value);
+        var unknownDirective = new CrawlCtrl.UnknownDirective(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedOriginalValue, unknownDirective.OriginalValue);
@@ -36,7 +36,7 @@ public sealed class UnknownDirectiveValueTests
         const string directive = "directive";
 
         // Act
-        var unknownDirective = new UnknownDirective(directive: directive, value: value);
+        var unknownDirective = new CrawlCtrl.UnknownDirective(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedValue, unknownDirective.Value);
@@ -50,7 +50,7 @@ public sealed class UnknownDirectiveValueTests
         const string? value = null;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new UnknownDirective(directive: directive, value: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.UnknownDirective(directive: directive, value: value));
 
         // Assert
         Assert.Equal("value", exception.ParamName);

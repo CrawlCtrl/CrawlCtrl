@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.ValidSitemap;
 
 public sealed class ValidSitemapValueTests
 {
@@ -15,7 +15,7 @@ public sealed class ValidSitemapValueTests
         var uri = new Uri(uriString);
         
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
 
         // Assert
         Assert.Equal(expectedOriginalValue, validSitemap.OriginalValue);
@@ -32,7 +32,7 @@ public sealed class ValidSitemapValueTests
         var uri = new Uri(uriString);
         
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
 
         // Assert
         Assert.Equal(expectedValue, validSitemap.Value);
@@ -45,7 +45,7 @@ public sealed class ValidSitemapValueTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
         
         // Assert
         Assert.Equal(uri, validSitemap.Uri);
@@ -58,7 +58,7 @@ public sealed class ValidSitemapValueTests
         Uri? uri = null;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new ValidSitemap(uri: uri));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.ValidSitemap(uri: uri));
 
         // Assert
         Assert.Equal("uri", exception.ParamName);

@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.InvalidSitemap;
 
 public sealed class InvalidSitemapValueTests
 {
@@ -16,7 +16,7 @@ public sealed class InvalidSitemapValueTests
         // Arrange
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
 
         // Assert
         Assert.Equal(expectedOriginalValue, invalidSitemap.OriginalValue);
@@ -34,7 +34,7 @@ public sealed class InvalidSitemapValueTests
         // Arrange
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
 
         // Assert
         Assert.Equal(expectedValue, invalidSitemap.Value);
@@ -47,7 +47,7 @@ public sealed class InvalidSitemapValueTests
         const string? value = null;
 
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(value: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.InvalidSitemap(value: value));
 
         // Assert
         Assert.Equal("value", exception.ParamName);

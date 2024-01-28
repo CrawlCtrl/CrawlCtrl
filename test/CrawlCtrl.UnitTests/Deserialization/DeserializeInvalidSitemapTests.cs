@@ -1,9 +1,9 @@
 using CrawlCtrl.Deserialization;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization;
 
-public sealed class DeserializingInvalidSitemapTests
+public sealed class DeserializeInvalidSitemapTests
 {
     private const string SitemapDirective = "sitemap";
     private const string InvalidSitemapValue = "";

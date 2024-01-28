@@ -2,9 +2,9 @@ using CrawlCtrl.Deserialization;
 using NSubstitute;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization;
 
-public sealed class DeserializingLineWithDeserializerTests
+public sealed class DeserializeLineWithDeserializerTests
 {
     private readonly ILineDeserializer<TestLine> _deserializerMock = Substitute.For<ILineDeserializer<TestLine>>();
 
