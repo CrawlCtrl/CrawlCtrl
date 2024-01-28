@@ -1,9 +1,9 @@
 using CrawlCtrl.Deserialization;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization;
 
-public sealed class DeserializingValidSitemapTests
+public sealed class DeserializeValidSitemapTests
 {
     private const string SitemapDirective = "sitemap";
     private const string ValidSitemapValue = "https://www.example.com/sitemap.xml";

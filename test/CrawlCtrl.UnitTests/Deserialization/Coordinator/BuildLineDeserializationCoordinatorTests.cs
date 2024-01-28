@@ -1,7 +1,7 @@
 using CrawlCtrl.Deserialization;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization.Coordinator;
 
 public sealed class BuildLineDeserializationCoordinatorTests
 {

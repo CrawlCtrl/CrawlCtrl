@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General;
+namespace CrawlCtrl.UnitTests.LineTypes.InvalidLine;
 
 public sealed class InvalidLineFullLineTests
 {
@@ -11,7 +11,7 @@ public sealed class InvalidLineFullLineTests
         const string value = "Invalid";
         
         // Act
-        var invalidLine = new InvalidLine(value: value, comment: null);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: null);
 
         // Assert
         Assert.Null(invalidLine.FullLine);
@@ -25,7 +25,7 @@ public sealed class InvalidLineFullLineTests
         const string? fullLine = null;
         
         // Act
-        var invalidLine = new InvalidLine(value: value, fullLine: fullLine);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, fullLine: fullLine);
 
         // Assert
         Assert.Null(invalidLine.FullLine);
@@ -41,7 +41,7 @@ public sealed class InvalidLineFullLineTests
         const string expectedFullLine = " Invalid ";
         
         // Act
-        var invalidLine = new InvalidLine(value: value, fullLine: fullLine);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, fullLine: fullLine);
 
         // Assert
         Assert.Equal(expectedFullLine, invalidLine.FullLine);

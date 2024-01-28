@@ -1,23 +1,23 @@
 using CrawlCtrl.Deserialization;
-using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization;
 
-public sealed class DeserializingUnknownDirectiveTests
+public sealed class DeserializeEmptyLineTests
 {
     [Theory]
-    [InlineData("unknown:")]
-    [InlineData("unknown: directive")]
-    [InlineData("unknown: directive # Some comment")]
-    public void WHEN_Line_is_unknown_directive_WHILE_Including_unknown_directives_THEN_Deserialize_as_unknown_directive(string line)
+    [InlineData("")]
+    [InlineData("# Some comment")]
+    [InlineData("  ")]
+    [InlineData("  # Some comment")]
+    public void WHEN_Line_is_empty_line_WHILE_Including_empty_lines_THEN_Deserialize_as_empty_line(string line)
     {
         // Arrange
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true
+                IncludeEmptyLines = true
             }
         );
         
@@ -25,21 +25,22 @@ public sealed class DeserializingUnknownDirectiveTests
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        Assert.IsType<UnknownDirective>(deserializedLine);
+        Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
     }
     
     [Theory]
-    [InlineData("unknown:")]
-    [InlineData("unknown: directive")]
-    [InlineData("unknown: directive # Some comment")]
-    public void WHEN_Line_is_unknown_directive_WHILE_Excluding_unknown_directives_THEN_Do_not_deserialize_as_unknown_directive(string line)
+    [InlineData("")]
+    [InlineData("# Some comment")]
+    [InlineData("  ")]
+    [InlineData("  # Some comment")]
+    public void WHEN_Line_is_empty_line_WHILE_Excluding_empty_lines_THEN_Do_not_deserialize_as_empty_line(string line)
     {
         // Arrange
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = false
+                IncludeEmptyLines = false
             }
         );
         
@@ -47,20 +48,22 @@ public sealed class DeserializingUnknownDirectiveTests
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        Assert.IsNotType<UnknownDirective>(deserializedLine);
+        Assert.IsNotType<CrawlCtrl.EmptyLine>(deserializedLine);
     }
-
+    
     [Theory]
-    [InlineData("unknown:", "unknown")]
-    [InlineData(" unknown : directive", " unknown ")]
-    public void WHEN_Line_is_unknown_directive_THEN_Set_directive_to_everything_before_directive_terminator(string line, string expectedDirective)
+    [InlineData("", "")]
+    [InlineData("# Some comment", "")]
+    [InlineData("  ", "  ")]
+    [InlineData("  # Some comment", "  ")]
+    public void WHEN_Line_is_empty_line_THEN_Set_value_to_everything_after_directive_terminator_excluding_comment(string line, string expectedValue)
     {
         // Arrange
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true
+                IncludeEmptyLines = true
             }
         );
         
@@ -68,32 +71,8 @@ public sealed class DeserializingUnknownDirectiveTests
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedDirective, unknownDirective.OriginalDirective);
-    }
-
-    [Theory]
-    [InlineData("unknown:", "")]
-    [InlineData("unknown:  ", "  ")]
-    [InlineData("unknown: directive ", " directive ")]
-    [InlineData("unknown: directive # Some comment", " directive ")]
-    public void WHEN_Line_is_unknown_directive_THEN_Set_value_to_everything_after_directive_terminator_excluding_comment(string line, string expectedValue)
-    {
-        // Arrange
-        var coordinator = new LineDeserializationCoordinator(
-            lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
-            options: new RobotsDeserializerOptions
-            {
-                IncludeUnknownDirectives = true
-            }
-        );
-        
-        // Act
-        var deserializedLine = coordinator.Deserialize(line);
-        
-        // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedValue, unknownDirective.OriginalValue);
+        var emptyLine = Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
+        Assert.Equal(expectedValue, emptyLine.OriginalValue);
     }
     
     [Fact]
@@ -104,19 +83,19 @@ public sealed class DeserializingUnknownDirectiveTests
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true,
+                IncludeEmptyLines = true,
                 IncludeComments = true
             }
         );
 
-        const string line = "directive: value";
+        const string line = "";
         
         // Act
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.OriginalComment);
+        var emptyLine = Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
+        Assert.Null(emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -127,19 +106,19 @@ public sealed class DeserializingUnknownDirectiveTests
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true,
+                IncludeEmptyLines = true,
                 IncludeComments = false
             }
         );
 
-        const string line = "directive: value";
+        const string line = "";
         
         // Act
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.OriginalComment);
+        var emptyLine = Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
+        Assert.Null(emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -150,20 +129,20 @@ public sealed class DeserializingUnknownDirectiveTests
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true,
+                IncludeEmptyLines = true,
                 IncludeComments = true
             }
         );
 
-        const string line = "directive: value # Some comment";
+        const string line = "# Some comment";
         const string expectedComment = " Some comment";
         
         // Act
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Equal(expectedComment, unknownDirective.OriginalComment);
+        var emptyLine = Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
+        Assert.Equal(expectedComment, emptyLine.OriginalComment);
     }
     
     [Fact]
@@ -174,26 +153,26 @@ public sealed class DeserializingUnknownDirectiveTests
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true,
+                IncludeEmptyLines = true,
                 IncludeComments = false
             }
         );
 
-        const string line = "directive: value # Some comment";
+        const string line = "# Some comment";
         
         // Act
         var deserializedLine = coordinator.Deserialize(line);
         
         // Assert
-        var unknownDirective = Assert.IsType<UnknownDirective>(deserializedLine);
-        Assert.Null(unknownDirective.OriginalComment);
+        var emptyLine = Assert.IsType<CrawlCtrl.EmptyLine>(deserializedLine);
+        Assert.Null(emptyLine.OriginalComment);
     }
-
+    
     [Theory]
-    [InlineData("the-directive: the-value # The comment", "the-directive: the-value # The comment")]
-    [InlineData(" the-directive: the-value # The comment", " the-directive: the-value # The comment")]
-    [InlineData("the-directive: the-value # The comment ", "the-directive: the-value # The comment ")]
-    [InlineData(" the-directive: the-value # The comment ", " the-directive: the-value # The comment ")]
+    [InlineData("# The comment", "# The comment")]
+    [InlineData(" # The comment", " # The comment")]
+    [InlineData("# The comment ", "# The comment ")]
+    [InlineData(" # The comment ", " # The comment ")]
     public void WHEN_Line_has_been_deserialized_THEN_Full_robots_txt_line_is_set(string line, string expectedFullLine)
     {
         // Arrange
@@ -201,7 +180,7 @@ public sealed class DeserializingUnknownDirectiveTests
             lineDeserializers: new Dictionary<string, ILineDeserializer<Line>>(),
             options: new RobotsDeserializerOptions
             {
-                IncludeUnknownDirectives = true
+                IncludeEmptyLines = true
             }
         );
         

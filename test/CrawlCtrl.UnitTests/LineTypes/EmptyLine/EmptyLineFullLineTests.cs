@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General;
+namespace CrawlCtrl.UnitTests.Deserialization.EmptyLine;
 
 public sealed class EmptyLineFullLineTests
 {
@@ -11,7 +11,7 @@ public sealed class EmptyLineFullLineTests
         const string value = "";
         
         // Act
-        var emptyLine = new EmptyLine(value: value, comment: null);
+        var emptyLine = new CrawlCtrl.EmptyLine(value: value, comment: null);
 
         // Assert
         Assert.Null(emptyLine.FullLine);
@@ -25,7 +25,7 @@ public sealed class EmptyLineFullLineTests
         const string? fullLine = null;
         
         // Act
-        var emptyLine = new EmptyLine(value: value, fullLine: fullLine);
+        var emptyLine = new CrawlCtrl.EmptyLine(value: value, fullLine: fullLine);
 
         // Assert
         Assert.Null(emptyLine.FullLine);
@@ -41,7 +41,7 @@ public sealed class EmptyLineFullLineTests
         const string expectedFullLine = "  ";
         
         // Act
-        var emptyLine = new EmptyLine(value: value, fullLine: fullLine);
+        var emptyLine = new CrawlCtrl.EmptyLine(value: value, fullLine: fullLine);
 
         // Assert
         Assert.Equal(expectedFullLine, emptyLine.FullLine);

@@ -1,9 +1,9 @@
 using CrawlCtrl.Deserialization;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization;
 
-public sealed class DeserializingInvalidLineTests
+public sealed class DeserializeInvalidLineTests
 {
     [Theory]
     [InlineData("invalid")]

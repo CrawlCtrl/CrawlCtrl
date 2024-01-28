@@ -1,7 +1,7 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.InvalidSitemap;
 
 public sealed class InvalidSitemapDirectiveTests
 {
@@ -13,7 +13,7 @@ public sealed class InvalidSitemapDirectiveTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, value: value, comment: null);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(directive: directive, value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedOriginalDirective, invalidSitemap.OriginalDirective);
@@ -27,7 +27,7 @@ public sealed class InvalidSitemapDirectiveTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(directive: directive, value: value, comment: null);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(directive: directive, value: value, comment: null);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.Directive);
@@ -41,7 +41,7 @@ public sealed class InvalidSitemapDirectiveTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new InvalidSitemap(directive: directive, value: value, comment: null));
+        var exception = Assert.Throws<ArgumentException>(() => new CrawlCtrl.InvalidSitemap(directive: directive, value: value, comment: null));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -55,7 +55,7 @@ public sealed class InvalidSitemapDirectiveTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new InvalidSitemap(directive: directive, value: value, comment: null));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.InvalidSitemap(directive: directive, value: value, comment: null));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -70,7 +70,7 @@ public sealed class InvalidSitemapDirectiveTests
         var expectedDirective = Constants.Directives.Sitemap;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.OriginalDirective);
@@ -85,7 +85,7 @@ public sealed class InvalidSitemapDirectiveTests
         var expectedDirective = Constants.Directives.Sitemap;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidSitemap = new CrawlCtrl.InvalidSitemap(value: value);
 
         // Assert
         Assert.Equal(expectedDirective, invalidSitemap.Directive);

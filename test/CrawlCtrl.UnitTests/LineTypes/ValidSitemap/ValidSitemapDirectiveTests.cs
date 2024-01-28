@@ -1,7 +1,7 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.ValidSitemap;
 
 public sealed class ValidSitemapDirectiveTests
 {
@@ -13,7 +13,7 @@ public sealed class ValidSitemapDirectiveTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
 
         // Act
-        var validSitemap = new ValidSitemap(directive: directive, uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(directive: directive, uri: uri);
 
         // Assert
         Assert.Equal(expectedOriginalDirective, validSitemap.OriginalDirective);
@@ -27,7 +27,7 @@ public sealed class ValidSitemapDirectiveTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
 
         // Act
-        var validSitemap = new ValidSitemap(directive: directive, uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(directive: directive, uri: uri);
 
         // Assert
         Assert.Equal(expectedDirective, validSitemap.Directive);
@@ -41,7 +41,7 @@ public sealed class ValidSitemapDirectiveTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new ValidSitemap(directive: directive, uri: uri));
+        var exception = Assert.Throws<ArgumentException>(() => new CrawlCtrl.ValidSitemap(directive: directive, uri: uri));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -55,7 +55,7 @@ public sealed class ValidSitemapDirectiveTests
         var uri = new Uri("https://www.example.com/sitemap.xml");
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new ValidSitemap(directive: directive, uri: uri));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.ValidSitemap(directive: directive, uri: uri));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -70,7 +70,7 @@ public sealed class ValidSitemapDirectiveTests
         var expectedDirective = Constants.Directives.Sitemap;
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
 
         // Assert
         Assert.Equal(expectedDirective, validSitemap.OriginalDirective);
@@ -85,7 +85,7 @@ public sealed class ValidSitemapDirectiveTests
         var expectedDirective = Constants.Directives.Sitemap;
 
         // Act
-        var validSitemap = new ValidSitemap(uri: uri);
+        var validSitemap = new CrawlCtrl.ValidSitemap(uri: uri);
 
         // Assert
         Assert.Equal(expectedDirective, validSitemap.Directive);

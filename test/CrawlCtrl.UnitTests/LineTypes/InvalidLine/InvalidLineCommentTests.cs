@@ -1,9 +1,9 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Sitemap;
+namespace CrawlCtrl.UnitTests.LineTypes.InvalidLine;
 
-public sealed class InvalidSitemapCommentTests
+public sealed class InvalidLineCommentTests
 {
     [Theory]
     [MemberData(nameof(CommentTestData.OriginalCommentTestData), MemberType = typeof(CommentTestData))]
@@ -13,10 +13,10 @@ public sealed class InvalidSitemapCommentTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value, comment: comment);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedOriginalComment, invalidSitemap.OriginalComment);
+        Assert.Equal(expectedOriginalComment, invalidLine.OriginalComment);
     }
     
     [Theory]
@@ -27,10 +27,10 @@ public sealed class InvalidSitemapCommentTests
         const string value = "Some value";
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value, comment: comment);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, invalidSitemap.Comment);
+        Assert.Equal(expectedComment, invalidLine.Comment);
     }
     
     [Fact]
@@ -43,10 +43,10 @@ public sealed class InvalidSitemapCommentTests
         const string? expectedComment = null;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value, comment: comment);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, invalidSitemap.OriginalComment);
+        Assert.Equal(expectedComment, invalidLine.OriginalComment);
     }
 
     [Fact]
@@ -59,10 +59,10 @@ public sealed class InvalidSitemapCommentTests
         const string? expectedComment = null;
 
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value, comment: comment);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: comment);
 
         // Assert
-        Assert.Equal(expectedComment, invalidSitemap.Comment);
+        Assert.Equal(expectedComment, invalidLine.Comment);
     }
     
     [Fact]
@@ -72,10 +72,10 @@ public sealed class InvalidSitemapCommentTests
         const string value = "Some value";
         
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: null);
         
         // Assert
-        Assert.Null(invalidSitemap.OriginalComment);
+        Assert.Null(invalidLine.OriginalComment);
     }
     
     [Fact]
@@ -85,9 +85,9 @@ public sealed class InvalidSitemapCommentTests
         const string value = "Some value";
         
         // Act
-        var invalidSitemap = new InvalidSitemap(value: value);
+        var invalidLine = new CrawlCtrl.InvalidLine(value: value, comment: null);
         
         // Assert
-        Assert.Null(invalidSitemap.Comment);
+        Assert.Null(invalidLine.Comment);
     }
 }

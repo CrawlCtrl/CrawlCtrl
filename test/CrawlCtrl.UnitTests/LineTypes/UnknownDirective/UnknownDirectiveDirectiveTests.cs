@@ -1,7 +1,7 @@
 using CrawlCtrl.UnitTests.TestData;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.General;
+namespace CrawlCtrl.UnitTests.LineTypes.UnknownDirective;
 
 public sealed class UnknownDirectiveDirectiveTests
 {
@@ -13,7 +13,7 @@ public sealed class UnknownDirectiveDirectiveTests
         const string value = "Some value";
 
         // Act
-        var unknownDirective = new UnknownDirective(directive: directive, value: value);
+        var unknownDirective = new CrawlCtrl.UnknownDirective(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedOriginalDirective, unknownDirective.OriginalDirective);
@@ -27,7 +27,7 @@ public sealed class UnknownDirectiveDirectiveTests
         const string value = "Some value";
 
         // Act
-        var unknownDirective = new UnknownDirective(directive: directive, value: value);
+        var unknownDirective = new CrawlCtrl.UnknownDirective(directive: directive, value: value);
 
         // Assert
         Assert.Equal(expectedDirective, unknownDirective.Directive);
@@ -41,7 +41,7 @@ public sealed class UnknownDirectiveDirectiveTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => new UnknownDirective(directive: directive, value: value));
+        var exception = Assert.Throws<ArgumentException>(() => new CrawlCtrl.UnknownDirective(directive: directive, value: value));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
@@ -55,7 +55,7 @@ public sealed class UnknownDirectiveDirectiveTests
         const string value = "Some value";
         
         // Act
-        var exception = Assert.Throws<ArgumentNullException>(() => new UnknownDirective(directive: directive, value: value));
+        var exception = Assert.Throws<ArgumentNullException>(() => new CrawlCtrl.UnknownDirective(directive: directive, value: value));
         
         // Assert
         Assert.Equal("directive", exception.ParamName);
