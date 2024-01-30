@@ -19,7 +19,7 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
 
         const string line = "test-directive: test-value # test comment";
@@ -28,7 +28,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default, default, default);
+        _deserializerMock.DidNotReceiveWithAnyArgs().Deserialize(default, default, default, default, default);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
 
         const string line = "test-directive: test-value # test comment";
@@ -51,7 +51,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default, default, default);
+        _deserializerMock.ReceivedWithAnyArgs(1).Deserialize(default, default, default, default, default);
     }
     
     [Fact]
@@ -65,7 +65,7 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
 
         const string line = " test-directive: test-value # test comment";
@@ -75,7 +75,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(expectedDirective, Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(expectedDirective, Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<ImmutableRobotsDeserializerOptions>());
     }
     
     [Theory]
@@ -93,14 +93,14 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
         
         // Act
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), expectedFullLine);
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), expectedFullLine, Arg.Any<ImmutableRobotsDeserializerOptions>());
     }
 
     [Fact]
@@ -114,7 +114,7 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
 
         const string line = "test-directive: test-value # test comment";
@@ -124,7 +124,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedValue, Arg.Any<string>(), Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), expectedValue, Arg.Any<string>(), Arg.Any<string>(), Arg.Any<ImmutableRobotsDeserializerOptions>());
     }
     
     [Fact]
@@ -141,7 +141,7 @@ public sealed class DeserializeLineWithDeserializerTests
             options: new RobotsDeserializerOptions
             {
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "test-directive: test-value # test comment";
@@ -151,7 +151,7 @@ public sealed class DeserializeLineWithDeserializerTests
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), expectedComment, Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), expectedComment, Arg.Any<string>(), Arg.Any<ImmutableRobotsDeserializerOptions>());
     }
 
     [Theory]
@@ -170,14 +170,14 @@ public sealed class DeserializeLineWithDeserializerTests
         
         var coordinator = new LineDeserializationCoordinator(
             lineDeserializers: lineDeserializers,
-            options: new RobotsDeserializerOptions()
+            options: new RobotsDeserializerOptions().ToImmutableOrDefault()
         );
         
         // Act
         coordinator.Deserialize(line);
 
         // Assert
-        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        _deserializerMock.Received(1).Deserialize(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<ImmutableRobotsDeserializerOptions>());
     }
 
     public sealed class TestLine : Line

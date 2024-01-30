@@ -14,8 +14,7 @@ public sealed class CompleteRobotsTxtDeserializationTests
         var expectedLines = RobotsTestData.CompleteRobotsTxt;
         var deserializationOptions = new RobotsDeserializerOptions
         {
-            IncludeSitemaps = true,
-            SitemapsInclusionScope = InclusionScope.All,
+            SitemapPolicy = SitemapPolicy.All,
             IncludeEmptyLines = true,
             IncludeInvalidLines = true,
             IncludeUnknownDirectives = true
@@ -43,8 +42,7 @@ public sealed class CompleteRobotsTxtDeserializationTests
         var expectedLines = RobotsTestData.CompleteRobotsTxt.Where(line => line is ValidSitemap);
         var deserializationOptions = new RobotsDeserializerOptions
         {
-            IncludeSitemaps = true,
-            SitemapsInclusionScope = InclusionScope.ValidOnly,
+            SitemapPolicy = SitemapPolicy.OnlyValid,
             IncludeEmptyLines = false,
             IncludeInvalidLines = false,
             IncludeUnknownDirectives = false

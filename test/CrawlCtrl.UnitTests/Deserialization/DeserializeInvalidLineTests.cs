@@ -18,7 +18,7 @@ public sealed class DeserializeInvalidLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeInvalidLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -41,7 +41,7 @@ public sealed class DeserializeInvalidLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeInvalidLines = false
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -64,7 +64,7 @@ public sealed class DeserializeInvalidLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeInvalidLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -85,7 +85,7 @@ public sealed class DeserializeInvalidLineTests
             {
                 IncludeInvalidLines = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "invalid";
@@ -108,7 +108,7 @@ public sealed class DeserializeInvalidLineTests
             {
                 IncludeInvalidLines = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "invalid";
@@ -131,7 +131,7 @@ public sealed class DeserializeInvalidLineTests
             {
                 IncludeInvalidLines = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "invalid # Some comment";
@@ -155,7 +155,7 @@ public sealed class DeserializeInvalidLineTests
             {
                 IncludeInvalidLines = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "invalid # Some comment";
@@ -181,7 +181,7 @@ public sealed class DeserializeInvalidLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeInvalidLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act

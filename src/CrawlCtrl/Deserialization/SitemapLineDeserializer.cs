@@ -4,17 +4,7 @@ namespace CrawlCtrl.Deserialization
 {
     internal sealed class SitemapLineDeserializer : ILineDeserializer<Sitemap>
     {
-        private readonly InclusionScope _inclusionScope;
-
-        public SitemapLineDeserializer(InclusionScope inclusionScope)
-        {
-            _inclusionScope = inclusionScope;
-        }
-        
-        private bool ReturnValidSitemaps => _inclusionScope == InclusionScope.All || _inclusionScope == InclusionScope.ValidOnly;
-        private bool ReturnInvalidSitemaps => _inclusionScope == InclusionScope.All || _inclusionScope == InclusionScope.InvalidOnly;
-
-        public Sitemap Deserialize(string directive, string value, string comment, string line)
+        public Sitemap Deserialize(string directive, string value, string comment, string line, ImmutableRobotsDeserializerOptions options)
         {
             if (directive is null)
             {
@@ -30,13 +20,45 @@ namespace CrawlCtrl.Deserialization
             {
                 throw new ArgumentNullException(nameof(line));
             }
+            
+            if (options is null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
 
             if (Uri.TryCreate(value, UriKind.Absolute, out var sitemapUri))
             {
-                return ReturnValidSitemaps ? new ValidSitemap(directive: directive, uri: sitemapUri, comment: comment, fullLine: line) : null;
+                return options.ReturnValidSitemaps()
+                    ? new ValidSitemap(directive: directive, uri: sitemapUri, comment: comment, fullLine: line) 
+                    : null;
             }
 
-            return ReturnInvalidSitemaps ? new InvalidSitemap(directive: directive, value: value, comment: comment, fullLine: line) : null;
+            return options.ReturnInvalidSitemaps()
+                ? new InvalidSitemap(directive: directive, value: value, comment: comment, fullLine: line)
+                : null;
+        }
+    }
+    
+    internal static class SitemapPolicyCheckExtensions
+    {
+        public static bool ReturnValidSitemaps(this ImmutableRobotsDeserializerOptions options)
+        {
+            if (options is null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            return options.SitemapPolicy == SitemapPolicy.All || options.SitemapPolicy == SitemapPolicy.OnlyValid;
+        }
+        
+        public static bool ReturnInvalidSitemaps(this ImmutableRobotsDeserializerOptions options)
+        {
+            if (options is null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            return options.SitemapPolicy == SitemapPolicy.All || options.SitemapPolicy == SitemapPolicy.OnlyInvalid;
         }
     }
 }

@@ -48,8 +48,9 @@ namespace CrawlCtrl
             {
                 throw new ArgumentNullException(nameof(robotsStreamReader));
             }
-
-            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(options);
+            
+            var immutableOptions = options.ToImmutableOrDefault();
+            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(immutableOptions);
 
             var lines = new List<Line>();
             while (robotsStreamReader.EndOfStream is false)
@@ -73,7 +74,8 @@ namespace CrawlCtrl
                 throw new ArgumentNullException(nameof(robotsStreamReader));
             }
             
-            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(options);
+            var immutableOptions = options.ToImmutableOrDefault();
+            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(immutableOptions);
             
             while (robotsStreamReader.EndOfStream is false)
             {
@@ -102,12 +104,8 @@ namespace CrawlCtrl
                 throw new ArgumentNullException(nameof(robotsStreamReader));
             }
             
-            if (options is null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(options);
+            var immutableOptions = options.ToImmutableOrDefault();
+            var lineDeserializationCoordinator = LineDeserializationCoordinatorFactory.Build(immutableOptions);
             
             while (robotsStreamReader.EndOfStream is false)
             {

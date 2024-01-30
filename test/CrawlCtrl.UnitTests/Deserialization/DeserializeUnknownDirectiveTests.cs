@@ -17,7 +17,7 @@ public sealed class DeserializeUnknownDirectiveTests
             options: new RobotsDeserializerOptions
             {
                 IncludeUnknownDirectives = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -39,7 +39,7 @@ public sealed class DeserializeUnknownDirectiveTests
             options: new RobotsDeserializerOptions
             {
                 IncludeUnknownDirectives = false
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -60,7 +60,7 @@ public sealed class DeserializeUnknownDirectiveTests
             options: new RobotsDeserializerOptions
             {
                 IncludeUnknownDirectives = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -84,7 +84,7 @@ public sealed class DeserializeUnknownDirectiveTests
             options: new RobotsDeserializerOptions
             {
                 IncludeUnknownDirectives = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -105,7 +105,7 @@ public sealed class DeserializeUnknownDirectiveTests
             {
                 IncludeUnknownDirectives = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "directive: value";
@@ -128,7 +128,7 @@ public sealed class DeserializeUnknownDirectiveTests
             {
                 IncludeUnknownDirectives = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "directive: value";
@@ -151,7 +151,7 @@ public sealed class DeserializeUnknownDirectiveTests
             {
                 IncludeUnknownDirectives = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "directive: value # Some comment";
@@ -175,7 +175,7 @@ public sealed class DeserializeUnknownDirectiveTests
             {
                 IncludeUnknownDirectives = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "directive: value # Some comment";
@@ -201,7 +201,7 @@ public sealed class DeserializeUnknownDirectiveTests
             options: new RobotsDeserializerOptions
             {
                 IncludeUnknownDirectives = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
