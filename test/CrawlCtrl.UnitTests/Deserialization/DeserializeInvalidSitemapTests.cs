@@ -5,6 +5,10 @@ namespace CrawlCtrl.UnitTests.Deserialization;
 
 public sealed class DeserializeInvalidSitemapTests
 {
+    private readonly SitemapLineDeserializer _sitemapLineDeserializer = new ();
+    private readonly ImmutableRobotsDeserializerOptions _options =
+        new RobotsDeserializerOptions { SitemapPolicy = SitemapPolicy.OnlyInvalid }.ToImmutableOrDefault();
+    
     private const string SitemapDirective = "sitemap";
     private const string InvalidSitemapValue = "";
     
@@ -16,12 +20,10 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Directive_is_set_WHILE_Deserializing_invalid_sitemap_THEN_Set_directive_on_invalid_sitemap(string directive)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         var expectedDirective = directive;
         
         // Act
-        var deserializedSitemap = sitemapLineDeserializer.Deserialize(directive: directive, value: InvalidSitemapValue, comment: null, line: string.Empty);
+        var deserializedSitemap = _sitemapLineDeserializer.Deserialize(directive: directive, value: InvalidSitemapValue, comment: null, line: string.Empty, _options);
         
         // Assert
         var invalidSitemap = Assert.IsType<InvalidSitemap>(deserializedSitemap);
@@ -33,13 +35,11 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Directive_is_null_WHILE_Deserializing_invalid_sitemap_THEN_Throw_exception()
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         const string? directive = null;
         
         // Act
         var exception = Assert.Throws<ArgumentNullException>(() => 
-            sitemapLineDeserializer.Deserialize(directive: directive, value: InvalidSitemapValue, comment: null, line: string.Empty)
+            _sitemapLineDeserializer.Deserialize(directive: directive, value: InvalidSitemapValue, comment: null, line: string.Empty, _options)
         );
 
         // Assert
@@ -47,33 +47,35 @@ public sealed class DeserializeInvalidSitemapTests
     }
 
     [Theory]
-    [InlineData(InclusionScope.All)]
-    [InlineData(InclusionScope.InvalidOnly)]
-    public void WHEN_Value_is_invalid_sitemap_WHILE_Including_invalid_sitemaps_THEN_Deserialize_invalid_sitemap(InclusionScope inclusionScope)
+    [InlineData(SitemapPolicy.All)]
+    [InlineData(SitemapPolicy.OnlyInvalid)]
+    public void WHEN_Value_is_invalid_sitemap_WHILE_Including_invalid_sitemaps_THEN_Deserialize_invalid_sitemap(SitemapPolicy sitemapPolicy)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(
-            inclusionScope: inclusionScope
-        );
+        var options = new RobotsDeserializerOptions
+        {
+            SitemapPolicy = sitemapPolicy
+        }.ToImmutableOrDefault();
 
         // Act
-        var sitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: string.Empty);
+        var sitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: string.Empty, options);
         
         // Assert
         Assert.IsType<InvalidSitemap>(sitemap);
     }
     
     [Theory]
-    [InlineData(InclusionScope.ValidOnly)]
-    public void WHEN_Value_is_invalid_sitemap_WHILE_Excluding_invalid_sitemaps_THEN_Return_null(InclusionScope inclusionScope)
+    [InlineData(SitemapPolicy.OnlyValid)]
+    public void WHEN_Value_is_invalid_sitemap_WHILE_Excluding_invalid_sitemaps_THEN_Return_null(SitemapPolicy sitemapPolicy)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(
-            inclusionScope: inclusionScope
-        );
+        var options = new RobotsDeserializerOptions
+        {
+            SitemapPolicy = sitemapPolicy
+        }.ToImmutableOrDefault();
 
         // Act
-        var sitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: string.Empty);
+        var sitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: string.Empty, options);
         
         // Assert
         Assert.Null(sitemap);
@@ -89,12 +91,10 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Value_is_set_WHILE_Deserializing_invalid_sitemap_THEN_Set_value_on_invalid_sitemap(string value)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         var expectedValue = value;
         
         // Act
-        var deserializedSitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: value, comment: null, line: string.Empty);
+        var deserializedSitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: value, comment: null, line: string.Empty, _options);
         
         // Assert
         var invalidSitemap = Assert.IsType<InvalidSitemap>(deserializedSitemap);
@@ -106,13 +106,11 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Value_is_null_WHILE_Deserializing_invalid_sitemap_THEN_Throw_exception()
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         const string? value = null;
         
         // Act
         var exception = Assert.Throws<ArgumentNullException>(() => 
-            sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: value, comment: null, line: string.Empty)
+            _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: value, comment: null, line: string.Empty, _options)
         );
 
         // Assert
@@ -129,12 +127,10 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Comment_is_set_WHILE_Deserializing_invalid_sitemap_THEN_Set_comment_on_invalid_sitemap(string comment)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         var expectedComment = comment;
 
         // Act
-        var deserializedSitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: comment, line: string.Empty);
+        var deserializedSitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: comment, line: string.Empty, _options);
         
         // Assert
         var invalidSitemap = Assert.IsType<InvalidSitemap>(deserializedSitemap);
@@ -146,13 +142,11 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Comment_is_null_WHILE_Deserializing_invalid_sitemap_THEN_Set_comment_on_invalid_sitemap()
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         const string? comment = null;
         const string? expectedComment = comment;
 
         // Act
-        var deserializedSitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: comment, line: string.Empty);
+        var deserializedSitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: comment, line: string.Empty, _options);
         
         // Assert
         var invalidSitemap = Assert.IsType<InvalidSitemap>(deserializedSitemap);
@@ -167,12 +161,10 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Line_is_set_WHILE_Deserializing_invalid_sitemap_THEN_Set_full_line_on_invalid_sitemap(string line)
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         var expectedLine = line;
 
         // Act
-        var deserializedSitemap = sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: line);
+        var deserializedSitemap = _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: line, _options);
         
         // Assert
         var invalidSitemap = Assert.IsType<InvalidSitemap>(deserializedSitemap);
@@ -184,13 +176,11 @@ public sealed class DeserializeInvalidSitemapTests
     public void WHEN_Line_is_null_WHILE_Deserializing_invalid_sitemap_THEN_Throw_exception()
     {
         // Arrange
-        var sitemapLineDeserializer = new SitemapLineDeserializer(InclusionScope.InvalidOnly);
-
         const string? line = null;
         
         // Act
         var exception = Assert.Throws<ArgumentNullException>(() => 
-            sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: line)
+            _sitemapLineDeserializer.Deserialize(directive: SitemapDirective, value: InvalidSitemapValue, comment: null, line: line, _options)
         );
 
         // Assert

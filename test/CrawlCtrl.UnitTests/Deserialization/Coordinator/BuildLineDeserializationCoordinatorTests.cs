@@ -11,8 +11,8 @@ public sealed class BuildLineDeserializationCoordinatorTests
         // Arrange
         var options = new RobotsDeserializerOptions
         {
-            IncludeSitemaps = true
-        };
+            SitemapPolicy = SitemapPolicy.OnlyValid
+        }.ToImmutableOrDefault();
         
         // Act
         var deserializationCoordinator = LineDeserializationCoordinatorFactory.Build(options);

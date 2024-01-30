@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace CrawlCtrl.Deserialization
 {
-    internal class LineDeserializationCoordinator
+    internal sealed class LineDeserializationCoordinator
     {
-        private readonly RobotsDeserializerOptions _options;
+        private readonly ImmutableRobotsDeserializerOptions _options;
+        private readonly IReadOnlyDictionary<string, ILineDeserializer<Line>> _lineDeserializers;
 
-        public LineDeserializationCoordinator(IReadOnlyDictionary<string, ILineDeserializer<Line>> lineDeserializers, RobotsDeserializerOptions options)
+        public LineDeserializationCoordinator(IReadOnlyDictionary<string, ILineDeserializer<Line>> lineDeserializers, ImmutableRobotsDeserializerOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
-            
-            LineDeserializers = lineDeserializers ?? throw new ArgumentNullException(nameof(lineDeserializers));
+            _lineDeserializers = lineDeserializers ?? throw new ArgumentNullException(nameof(lineDeserializers));
         }
-        
-        public readonly IReadOnlyDictionary<string, ILineDeserializer<Line>> LineDeserializers;
+
+        internal IReadOnlyDictionary<string, ILineDeserializer<Line>> LineDeserializers => _lineDeserializers;
 
         public Line Deserialize(string line)
         {
@@ -57,7 +57,8 @@ namespace CrawlCtrl.Deserialization
                     lineComponents.Directive,
                     lineComponents.Value,
                     lineComponents.Comment,
-                    line
+                    line,
+                    _options
                 );
 
                 return deserializedLine;

@@ -7,7 +7,6 @@ namespace CrawlCtrl
         public bool IncludeInvalidLines { get; set; } = false;
         public bool IncludeUnknownDirectives { get; set; } = false;
         
-        public bool IncludeSitemaps { get; set; } = true;
-        public InclusionScope SitemapsInclusionScope { get; set; } = InclusionScope.ValidOnly;
+        public SitemapPolicy SitemapPolicy { get; set; } = SitemapPolicy.OnlyValid;
     }
 }

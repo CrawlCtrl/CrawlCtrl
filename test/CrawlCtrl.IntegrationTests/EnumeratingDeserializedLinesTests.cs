@@ -10,8 +10,7 @@ public sealed class EnumeratingDeserializedLinesTests
     
     private readonly RobotsDeserializerOptions _deserializationOptions = new()
     {
-        IncludeSitemaps = true,
-        SitemapsInclusionScope = InclusionScope.All,
+        SitemapPolicy = SitemapPolicy.All,
         IncludeEmptyLines = true,
         IncludeInvalidLines = true,
         IncludeUnknownDirectives = true

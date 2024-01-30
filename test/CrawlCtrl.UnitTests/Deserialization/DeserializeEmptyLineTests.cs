@@ -18,7 +18,7 @@ public sealed class DeserializeEmptyLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeEmptyLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -41,7 +41,7 @@ public sealed class DeserializeEmptyLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeEmptyLines = false
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -64,7 +64,7 @@ public sealed class DeserializeEmptyLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeEmptyLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
@@ -85,7 +85,7 @@ public sealed class DeserializeEmptyLineTests
             {
                 IncludeEmptyLines = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "";
@@ -108,7 +108,7 @@ public sealed class DeserializeEmptyLineTests
             {
                 IncludeEmptyLines = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "";
@@ -131,7 +131,7 @@ public sealed class DeserializeEmptyLineTests
             {
                 IncludeEmptyLines = true,
                 IncludeComments = true
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "# Some comment";
@@ -155,7 +155,7 @@ public sealed class DeserializeEmptyLineTests
             {
                 IncludeEmptyLines = true,
                 IncludeComments = false
-            }
+            }.ToImmutableOrDefault()
         );
 
         const string line = "# Some comment";
@@ -181,7 +181,7 @@ public sealed class DeserializeEmptyLineTests
             options: new RobotsDeserializerOptions
             {
                 IncludeEmptyLines = true
-            }
+            }.ToImmutableOrDefault()
         );
         
         // Act
