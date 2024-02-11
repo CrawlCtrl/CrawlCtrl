@@ -1,7 +1,7 @@
 using CrawlCtrl.Deserialization;
 using Xunit;
 
-namespace CrawlCtrl.UnitTests.Deserialization;
+namespace CrawlCtrl.UnitTests.Deserialization.Deserializers;
 
 public sealed class DeserializeValidSitemapTests
 {
