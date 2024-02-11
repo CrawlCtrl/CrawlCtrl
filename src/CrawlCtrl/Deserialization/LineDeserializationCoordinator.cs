@@ -49,7 +49,7 @@ namespace CrawlCtrl.Deserialization
                     : null;
             }
 
-            var sanitizedDirective = lineComponents.Directive.Trim().ToLower();
+            var sanitizedDirective = DirectiveStringSanitizer.SanitizeDirective(lineComponents.Directive);
 
             if (LineDeserializers.TryGetValue(sanitizedDirective, out var lineDeserializer))
             {
